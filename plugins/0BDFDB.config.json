@@ -1,7 +1,8 @@
 {
 	"all": {
 		"changeLogs": {
-			"BDFDB": "3.0.9"
+			"BDFDB": "3.1.4",
+			"Translator": "2.5.4"
 		},
 		"choices": {
 			"toastPosition": "right"
@@ -12,6 +13,9 @@
 			"showSupportBadges": false,
 			"useChromium": false
 		},
-		"hashes": {}
+		"hashes": {
+			"0BDFDB.data.json": "54d62dafd72b1873ccbc9f2fe02bbe4024657003",
+			"0BDFDB.raw.css": "a1c4a8b6f28c4765c6af2853ddf13a35922a2b9e"
+		}
 	}
 }

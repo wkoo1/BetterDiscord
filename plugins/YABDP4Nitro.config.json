@@ -30,6 +30,8 @@
         "activityJoiningMode": false,
         "activityBypass": true,
         "customActivityURL": "",
-        "customActivity": false
+        "customActivity": false,
+        "forceStickersUnlocked": false,
+        "changePremiumType": false
     }
 }
