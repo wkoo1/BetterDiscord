@@ -2,6 +2,7 @@
 	"all": {
 		"changeLogs": {
 			"BDFDB": "3.1.4",
+			"PluginRepo": "2.4.6",
 			"Translator": "2.5.4"
 		},
 		"choices": {
