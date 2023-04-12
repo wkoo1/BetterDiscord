@@ -1,6 +1,6 @@
 {
     "currentVersionInfo": {
-        "version": "4.4.1",
+        "version": "4.4.7",
         "hasShownChangelog": true
     },
     "settings": {
@@ -11,6 +11,7 @@
         "emojiBypassForValidEmoji": true,
         "PNGemote": true,
         "uploadEmotes": false,
+        "uploadStickers": true,
         "CustomFPSEnabled": false,
         "CustomFPS": 75,
         "ResolutionEnabled": false,
