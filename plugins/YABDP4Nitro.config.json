@@ -1,6 +1,6 @@
 {
     "currentVersionInfo": {
-        "version": "4.4.7",
+        "version": "4.5.3",
         "hasShownChangelog": true
     },
     "settings": {
@@ -28,11 +28,14 @@
         "ResolutionSwapper": false,
         "stickerBypass": true,
         "profileV2": true,
+        "forceStickersUnlocked": false,
+        "changePremiumType": false,
+        "videoCodec": 0,
+        "clientThemes": true,
+        "lastGradientSettingStore": -1,
         "activityJoiningMode": false,
         "activityBypass": true,
         "customActivityURL": "",
-        "customActivity": false,
-        "forceStickersUnlocked": false,
-        "changePremiumType": false
+        "customActivity": false
     }
 }
