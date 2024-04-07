@@ -12,6 +12,7 @@
         "PNGemote": true,
         "uploadEmotes": false,
         "uploadStickers": true,
+        "uploadStickers": true,
         "CustomFPSEnabled": false,
         "CustomFPS": 75,
         "ResolutionEnabled": false,
@@ -94,6 +95,7 @@
         "activityJoiningMode": false,
         "activityBypass": true,
         "customActivityURL": "",
+        "customActivity": false
         "customActivity": false
     }
 }

@@ -660,6 +660,15 @@ module.exports = (_ => {
 						if (children[index].props.children.find(n => n && n.props && n.props.id == "themerepo-repo")) children[index].props.children.splice(children[index].props.children.length-1, 0, item);
 						else children[index].props.children.push(item);
 					}
+					if (index > -1 && BDFDB.ArrayUtils.is(children[index].props.children)) {
+						let item = BDFDB.ContextMenuUtils.createItem(BDFDB.LibraryComponents.MenuItems.MenuItem, {
+							label: "Plugin Repo",
+							id: BDFDB.ContextMenuUtils.createItemId(this.name, "repo"),
+							action: _ => BDFDB.LibraryModules.UserSettingsUtils.open("pluginrepo")
+						});
+						if (children[index].props.children.find(n => n && n.props && n.props.id == "themerepo-repo")) children[index].props.children.splice(children[index].props.children.length-1, 0, item);
+						else children[index].props.children.push(item);
+					}
 				});
 			}
 			
@@ -861,8 +870,10 @@ module.exports = (_ => {
 				if (!plugin || typeof plugin.authorname != "string") return;
 				const iPlugin = BDFDB.BDUtils.getPlugin(plugin.name, false, true);
 				if (iPlugin && (plugin.authorname.toUpperCase().indexOf(this.getString(iPlugin.author).toUpperCase()) > -1 || this.getString(iPlugin.author).toUpperCase().indexOf(plugin.authorname.toUpperCase()) > -1)) return iPlugin;
+				if (iPlugin && (plugin.authorname.toUpperCase().indexOf(this.getString(iPlugin.author).toUpperCase()) > -1 || this.getString(iPlugin.author).toUpperCase().indexOf(plugin.authorname.toUpperCase()) > -1)) return iPlugin;
 				else if (plugin.rawSourceUrl && window.BdApi && BdApi.Plugins && typeof BdApi.Plugins.getAll == "function") {
 					const filename = plugin.rawSourceUrl.split("/").pop();
+					for (let p of BdApi.Plugins.getAll()) if (p.filename == filename && (plugin.authorname.toUpperCase().indexOf(this.getString(p.author).toUpperCase()) > -1 || this.getString(p.author).toUpperCase().indexOf(plugin.authorname.toUpperCase()) > -1)) return p;
 					for (let p of BdApi.Plugins.getAll()) if (p.filename == filename && (plugin.authorname.toUpperCase().indexOf(this.getString(p.author).toUpperCase()) > -1 || this.getString(p.author).toUpperCase().indexOf(plugin.authorname.toUpperCase()) > -1)) return p;
 				}
 			}

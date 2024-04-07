@@ -1334,6 +1334,16 @@ module.exports = (_ => {
 								else return defaultExport ? r : req.c[i];
 							}
 						}
+						if (config.moduleName && m && m[config.moduleName] && (typeof m[config.moduleName] == "object" || typeof m[config.moduleName] == "function")) {
+							if (!!(r = filter(m[config.moduleName]))) {
+								if (all) found.push(defaultExport ? r : req.c[i]);
+								else return defaultExport ? r : req.c[i];
+							}
+							else if (m[config.moduleName].type && (typeof m[config.moduleName].type == "object" || typeof m[config.moduleName].type == "function") && !!(r = filter(m[config.moduleName].type))) {
+								if (all) found.push(defaultExport ? r : req.c[i]);
+								else return defaultExport ? r : req.c[i];
+							}
+						}
 						if (m && m.__esModule && m.default && (typeof m.default == "object" || typeof m.default == "function")) {
 							if (!!(r = filter(m.default))) {
 								if (all) found.push(defaultExport ? r : req.c[i]);

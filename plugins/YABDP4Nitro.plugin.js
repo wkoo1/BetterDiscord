@@ -277,7 +277,6 @@ module.exports = (() => {
 						}
 					}
 					
-
 					if(this.settings.stickerBypass){
 						try{
 							this.stickerSending()
@@ -347,6 +346,57 @@ module.exports = (() => {
 						BdApi.Patcher.instead("YABDP4Nitro", this.stickerSendabilityModule, "isSendableSticker", () => {
 							return true
 						});
+					}
+					if(this.settings.clientThemes){
+						try{
+							const clientthemesmodule = BdApi.Webpack.getModule(BdApi.Webpack.Filters.byProps("isPreview"));
+							delete clientthemesmodule.isPreview;
+							Object.defineProperty(clientthemesmodule, "isPreview", { //Enabling the nitro theme settings
+								value: false,
+								configurable: true,
+								enumerable: true,
+								writable: true,
+							});
+							
+							const shouldSync = WebpackModules.getByProps("shouldSync"); //Disabling syncing the profile theme
+							Patcher.instead(shouldSync, "shouldSync", (callback, arg) => {
+								//console.log(arg);
+								if(arg[0] = "appearance"){
+									return false
+								}else{
+									callback.shouldSync(arg);
+								}
+							});
+							
+							const themesModule = ZLibrary.WebpackModules.getByProps("V1", "ZI");
+							const gradientSettingModule = ZLibrary.WebpackModules.getByProps("Bf", "X9", "zO");
+							
+							BdApi.Patcher.before("YABDP4Nitro", themesModule, "ZI", (_,args) => {
+								
+								if(args[0].backgroundGradientPresetId != undefined){ //If appearance is changed to a nitro client theme
+									this.settings.lastGradientSettingStore = parseInt(args[0].backgroundGradientPresetId); //Store the gradient value
+									Utilities.saveSettings(this.getName(), this.settings); //Save the gradient value to file
+								}
+								if(args[0].backgroundGradientPresetId == undefined){ //If appearance is changed to a non-nitro client theme
+									this.settings.lastGradientSettingStore = -1; //Set the gradient value to -1 (disabled)
+									Utilities.saveSettings(this.getName(), this.settings); //Save that value to file
+								}
+								
+								themesModule.ZP.updateTheme(args[0].theme); //Change from light to dark theme. It was having issues due to shouldSync being false so we just set it manually if the user changes the Appearance
+								
+								if(this.settings.lastGradientSettingStore != -1){ //If appearance is changed to a nitro client theme
+									gradientSettingModule.zO(this.settings.lastGradientSettingStore); //Apply nitro client theme
+								}
+								//console.log(this.settings.lastGradientSettingStore);
+							});
+							
+							if(this.settings.lastGradientSettingStore != -1){ //If appearance is changed to a nitro client theme
+								gradientSettingModule.zO(this.settings.lastGradientSettingStore); //Restore gradient on plugin load/save if it is set
+							}
+							
+						}catch(err){
+							console.warn(err)
+						}
 					}
 					
 					if(this.settings.clientThemes){

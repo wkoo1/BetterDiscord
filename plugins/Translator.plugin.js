@@ -310,6 +310,7 @@ module.exports = (_ => {
 				auto: true,
 				funcName: "deepLTranslate",
 				languages: ["bg","cs","da","de","en","el","es","et","fi","fr","hu","id","it","ja","ko","lt","lv","nl","no","pl","pt","ro","ru","sk","sl","sv","tr","uk","zh"],
+				languages: ["bg","cs","da","de","en","el","es","et","fi","fr","hu","id","it","ja","ko","lt","lv","nl","no","pl","pt","ro","ru","sk","sl","sv","tr","uk","zh"],
 				premium: true,
 				key: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx:fx"
 			},
@@ -357,6 +358,7 @@ module.exports = (_ => {
 					"zh-CN": "zh",
 					"zh-TW": "cht"
 				},
+				key: "xxxxxxxxxx xxxxxxxxxxxxxxxxxxxx"
 				key: "xxxxxxxxxx xxxxxxxxxxxxxxxxxxxx"
 			}
 		};
@@ -702,6 +704,7 @@ module.exports = (_ => {
 			
 			processChannelTextAreaButtons (e) {
 				if (!this.settings.general.addTranslateButton || e.instance.props.disabled || e.instance.props.type != BDFDB.DiscordConstants.ChannelTextAreaTypes.NORMAL && e.instance.props.type != BDFDB.DiscordConstants.ChannelTextAreaTypes.NORMAL_WITH_ACTIVITY && e.instance.props.type != BDFDB.DiscordConstants.ChannelTextAreaTypes.SIDEBAR) return;
+				if (e.returnvalue) e.returnvalue.props.children.unshift(BDFDB.ReactUtils.createElement(TranslateButtonComponent, {
 				if (e.returnvalue) e.returnvalue.props.children.unshift(BDFDB.ReactUtils.createElement(TranslateButtonComponent, {
 					guildId: e.instance.props.channel.guild_id ? e.instance.props.channel.guild_id : "@me",
 					channelId: e.instance.props.channel.id
@@ -1623,6 +1626,7 @@ module.exports = (_ => {
 							context_translator:					"Αναζήτηση μετάφρασης",
 							detect_language:					"Εντοπισμός γλώσσας",
 							error_dailylimit:					"Συμπληρώθηκε το ημερήσιο όριο αιτημάτων.",
+							error_hourlylimit:					"Συμπληρώθηκε το ωριαίο όριο αιτημάτων.",
 							error_hourlylimit:					"Συμπληρώθηκε το ωριαίο όριο αιτημάτων.",
 							error_keyoutdated:					"Το κλειδί API δεν είναι ενημερωμένο.",
 							error_monthlylimit:					"Συμπληρώθηκε το μηνιαίο όριο αιτημάτων.",
